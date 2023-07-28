@@ -3,18 +3,17 @@ import { connect } from 'react-redux';
 import { useState, useEffect } from "react";
 
 const EditSpotter = (props: any) => {
-    debugger;
     var id = props.match.params.recordId;
 
-
     const fetchData = () => {
-        fetch("http://localhost:5079/getAircraftSpotterById?id=" + id).
-            then(response => {
-                return response.json()
-            }).then(data => {
-                debugger;
-                setFormData(data);
-            })
+        fetch("http://localhost:5079/getAircraftSpotterById?id=" + id, {
+            mode: 'cors',
+            headers: { 'XApiKey': 'usrKEYvaladm@pLSp2023' }
+        }).then(response => {
+            return response.json()
+        }).then(data => {
+            setFormData(data);
+        })
     }
 
     const setFormData = (data: any) => {
@@ -23,6 +22,7 @@ const EditSpotter = (props: any) => {
         setRegistrationNumber(data.registration);
         setLocation(data.location);
         setSpottedDate(data.spottedDate);
+        setImageName(data.filePath);
     }
 
     useEffect(() => {
@@ -40,6 +40,8 @@ const EditSpotter = (props: any) => {
     const [imageFile, setImageFile] = useState("");
     const [imageName, setImageName] = useState("");
 
+    const [cssClassMessage, setCssClassMessage] = useState("");
+
     const handleImage = (e: any) => {
         setImageFile(e.target.files[0]);
         setImageName(e.target.files[0].name);
@@ -54,14 +56,15 @@ const EditSpotter = (props: any) => {
         try {
             let res = await fetch("http://localhost:5079/updateAircraftSpotter", {
                 method: "POST",
-                body: formData
+                body: formData,
+                mode: 'cors',
+                headers: { 'XApiKey': 'usrKEYvaladm@pLSp2023' }
             });
-            let resJson = await res.json();
             if (res.status === 200) {
-                setMake("");
-                setModel("");
+                setCssClassMessage('message alert alert-success');
                 setMessage("Record saved successfully");
             } else {
+                setCssClassMessage('message alert alert-danger');
                 setMessage("Some error occured");
             }
         } catch (err) {
@@ -162,11 +165,11 @@ const EditSpotter = (props: any) => {
                     </div>
                 </div>
                 <div className={'column'} style={{ marginLeft: "80px" }}>
-                    <img style={{ width: '300px', height: '300px' }} src={imageName}></img>
+                    <img style={{ width: '300px', height: '300px' }} src={`data:image/gif;base64,${imageName}`}></img>
                 </div>
             </div>
 
-            <div className="message">{message ? <p>{message}</p> : null}</div>
+            <div className={cssClassMessage} >{message ? <p>{message}</p> : null}</div>
         </form>
     );
 }

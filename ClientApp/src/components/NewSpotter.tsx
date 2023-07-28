@@ -15,6 +15,9 @@ const NewSpotter = () => {
     const [imageFile, setImageFile] = useState("");
     const [imageName, setImageName] = useState("");
 
+    const [cssClassMessage, setCssClassMessage] = useState("");
+
+
     const handleImage = (e: any) => {
         setImageFile(e.target.files[0]);
         setImageName(e.target.files[0].name);
@@ -36,14 +39,15 @@ const NewSpotter = () => {
         try {
             let res = await fetch("http://localhost:5079/createNewSpotter", {
                 method: "POST",
-                body: formData
+                body: formData,
+                mode: 'cors',
+                headers: { 'XApiKey': 'usrKEYvaladm@pLSp2023' }
             });
-            let resJson = await res.json();
             if (res.status === 200) {
-                setMake("");
-                setModel("");
+                setCssClassMessage('message alert alert-success');
                 setMessage("Record saved successfully");
             } else {
+                setCssClassMessage('message alert alert-danger');
                 setMessage("Some error occured");
             }
         } catch (err) {
@@ -127,11 +131,8 @@ const NewSpotter = () => {
                         </div>
                     </div>
                 </div>
-                <div className={'column'} style={{ marginLeft: "80px" }}>
-                    <img style={{ width: '300px', height: '300px' }} src={imageName}></img>
-                </div>
             </div>
-            <div className="message">{message ? <p>{message}</p> : null}</div>
+            <div className={cssClassMessage} >{message ? <p>{message}</p> : null}</div>
         </form>
     );
 }

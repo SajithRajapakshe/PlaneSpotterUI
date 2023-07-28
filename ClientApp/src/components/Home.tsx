@@ -21,7 +21,9 @@ const Home = () => {
     const callApiAndFetchData = (url: string, parameter: string, method: string) => {
         try {
             fetch(url + parameter, {
-                method: method
+                method: method,
+                mode: 'cors',
+                headers: { 'XApiKey':'usrKEYvaladm@pLSp2023' }
             }).then(response => {
                 return response.json()
             }).then(data => {
@@ -64,7 +66,6 @@ const Home = () => {
                 <tbody>
                     {
                         spotters.map((spotter: any) => {
-                            debugger;
                             var url = "/editSpotter/" + spotter.recordId;
                             return (<tr key={spotter.recordId}>
                                 <td>{spotter.make}</td>
