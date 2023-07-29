@@ -48,7 +48,7 @@ const NewSpotter = () => {
                 setMessage("Record saved successfully");
             } else {
                 setCssClassMessage('message alert alert-danger');
-                setMessage("Some error occured");
+                setMessage("Some error occured, Please validate your inputs and retry");
             }
         } catch (err) {
             console.log(err);

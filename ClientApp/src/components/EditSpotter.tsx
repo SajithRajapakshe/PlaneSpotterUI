@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 const EditSpotter = (props: any) => {
     var id = props.match.params.recordId;
-
+   
     const fetchData = () => {
         fetch("http://localhost:5079/getAircraftSpotterById?id=" + id, {
             mode: 'cors',
@@ -65,7 +65,7 @@ const EditSpotter = (props: any) => {
                 setMessage("Record saved successfully");
             } else {
                 setCssClassMessage('message alert alert-danger');
-                setMessage("Some error occured");
+                setMessage("Some error occured, Please validate your inputs and retry");
             }
         } catch (err) {
             console.log(err);
