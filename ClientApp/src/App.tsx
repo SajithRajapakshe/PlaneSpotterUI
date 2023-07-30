@@ -8,6 +8,7 @@ import NewSpotter from './components/NewSpotter'
 
 import './custom.css'
 import EditSpotter from './components/EditSpotter';
+import ViewSpotter from './components/ViewSpotter';
 
 export default () => (
     <Layout>
@@ -15,6 +16,7 @@ export default () => (
         <Route path='/counter' component={Counter} />
         <Route path='/newSpotter' component={NewSpotter} />
         <Route path='/editSpotter/:recordId?' component={EditSpotter} />
+        <Route path='/viewSpotter/:recordId?' component={ViewSpotter} />
         <Route path='/fetch-data/:startDateIndex?' component={FetchData} />
     </Layout>
 );

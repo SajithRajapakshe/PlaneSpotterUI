@@ -23,9 +23,13 @@
   <ItemGroup>
     <None Remove="ClientApp\src\components\EditSpotter.tsx" />
     <None Remove="ClientApp\src\components\NewSpotter.tsx" />
+    <None Remove="ClientApp\src\components\ViewSpotter.tsx" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\components\ViewSpotter.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\components\EditSpotter.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>

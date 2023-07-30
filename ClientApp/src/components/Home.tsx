@@ -23,7 +23,7 @@ const Home = () => {
             fetch(url + parameter, {
                 method: method,
                 mode: 'cors',
-                headers: { 'XApiKey':'usrKEYvaladm@pLSp2023' }
+                headers: { 'XApiKey': 'usrKEYvaladm@pLSp2023' }
             }).then(response => {
                 return response.json()
             }).then(data => {
@@ -67,12 +67,14 @@ const Home = () => {
                     {
                         spotters.map((spotter: any) => {
                             var url = "/editSpotter/" + spotter.recordId;
+                            var viewUrl = "/viewSpotter/" + spotter.recordId;
                             return (<tr key={spotter.recordId}>
                                 <td>{spotter.make}</td>
                                 <td>{spotter.model}</td>
                                 <td>{spotter.registration}</td>
                                 <td>{spotter.location}</td>
                                 <td>{spotter.spottedDate}</td>
+                                <td><Link to={viewUrl}>View</Link></td>
                                 <td><Link to={url}>Edit</Link></td>
                                 <td><a href="#" onClick={event => handleDelete(event, spotter.recordId)}>Remove</a></td>
                             </tr>
