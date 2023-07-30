@@ -44,7 +44,6 @@ const EditSpotter = (props: any) => {
 
     const handleImage = (e: any) => {
         setImageFile(e.target.files[0]);
-        setImageName(e.target.files[0].name);
     }
 
 
